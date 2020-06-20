@@ -10,15 +10,20 @@ pipeline {
     stages{
         stage('SCM Checkout'){
             steps {
-                git 'https://github.com/mniyonshuti/jenkins-maven'
+                git 'https://github.com/mniyonshuti/aws-gradle'
             }
         }
-        stage('Clean'){
+        stage(' Gradle Clean'){
             steps{
-                sh 'mvn clean'
+                sh './gradleW clean'
             }
         }
-        stage('Compile'){
+        stage(' Gradle build'){
+            steps{
+                 sh './gradleW build'
+            }
+        }
+        stage('Gradle Compile'){
             steps  {
                 sh 'mvn compiler:compile'
             }
