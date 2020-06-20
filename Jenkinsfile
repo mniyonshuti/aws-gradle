@@ -6,8 +6,8 @@ pipeline {
         registry = "mniyonshuti/test2"
         registryCredential = 'niyo-docker'
         dockerImage = ''
-        REGION = 'us-east-1'
-        SUBNET_ID = 'subnet-a5b848c3'
+//         REGION = 'us-east-1'
+//         SUBNET_ID = 'subnet-a5b848c3'
     }
     stages{
 //         stage('SCM Checkout'){
@@ -69,9 +69,9 @@ pipeline {
                DOCKER_HUB_LOGIN = credentials('niyo-docker')
             }
             steps {
-//                 withAWS(credentials: 'niyo-aws-credential', region: env.REGION) {
+                withAWS(credentials: 'niyo-aws-credential', region: env.REGION) {
                   sh './gradlew awsCfnMigrateStack awsCfnWaitStackComplete -PsubnetId=$SUBNET_ID -PdockerHubUsername=$DOCKER_HUB_LOGIN_USR -Pregion=$REGION'
-//                 }
+                }
             }
         }
     }

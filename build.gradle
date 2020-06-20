@@ -23,3 +23,37 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+
+String dockerHubUsernameProperty = findProperty('dockerHubUsername') ?: 'tkgregory'
+String imageName = "${dockerHubUsernameProperty}/spring-boot-api-example:$version"
+
+docker {
+	name imageName
+	files "build/libs/${bootJar.archiveFileName.get()}"
+	buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+}
+
+dockerRun {
+	name project.name
+	image imageName
+	ports '8080:8080'
+	clean true
+}
+
+import com.amazonaws.services.cloudformation.model.Capability
+
+aws {
+	region = findProperty('region') ?: 'us-east-1'
+}
+
+cloudFormation {
+	stackName "niyo-stack"
+	stackParams([
+			SubnetID: findProperty('subnetId') ?: '',
+			ServiceName: 'niyo',
+			ServiceVersion: '4.0',
+			DockerHubUsername: dockerHubUsernameProperty
+	])
+	templateFile project.file("ecs.yml")
+}
