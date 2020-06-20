@@ -24,22 +24,22 @@ test {
 	useJUnitPlatform()
 }
 
-
-String dockerHubUsernameProperty = findProperty('dockerHubUsername') ?: 'tkgregory'
-String imageName = "${dockerHubUsernameProperty}/spring-boot-api-example:$version"
-
-docker {
-	name imageName
-	files "build/libs/${bootJar.archiveFileName.get()}"
-	buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
-}
-
-dockerRun {
-	name project.name
-	image imageName
-	ports '8080:8080'
-	clean true
-}
+//
+//String dockerHubUsernameProperty = findProperty('dockerHubUsername') ?: 'tkgregory'
+//String imageName = "${dockerHubUsernameProperty}/spring-boot-api-example:$version"
+//
+//docker {
+//	name imageName
+//	files "build/libs/${bootJar.archiveFileName.get()}"
+//	buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+//}
+//
+//dockerRun {
+//	name project.name
+//	image imageName
+//	ports '8080:8080'
+//	clean true
+//}
 
 import com.amazonaws.services.cloudformation.model.Capability
 
@@ -53,7 +53,7 @@ cloudFormation {
 			SubnetID: findProperty('subnetId') ?: '',
 			ServiceName: 'niyo',
 			ServiceVersion: '4.0',
-			DockerHubUsername: dockerHubUsernameProperty
+			DockerHubUsername: 'mniyonshuti'
 	])
 	templateFile project.file("ecs.yml")
 }
