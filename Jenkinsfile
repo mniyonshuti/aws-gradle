@@ -25,17 +25,17 @@ pipeline {
         }
         stage('Gradle Compile'){
             steps  {
-                sh 'mvn compiler:compile'
+                sh './gradleW compileJava'
             }
         }
-        stage('test'){
+        stage('Gradle Test'){
             steps {
-                sh 'mvn compiler:testCompile'
+                sh './gradlew test'
             }
         }
-        stage('Package'){
+        stage('Gradle Package'){
             steps {
-                sh 'mvn package'
+                sh './gradlew  bootJar'
             }
         }
 
