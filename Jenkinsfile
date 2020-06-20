@@ -6,8 +6,8 @@ pipeline {
         registry = "mniyonshuti/test2"
         registryCredential = 'niyo-docker'
         dockerImage = ''
-//         REGION = 'us-east-1'
-//         SUBNET_ID = 'subnet-a5b848c3'
+        REGION = 'us-east-1'
+        SUBNET_ID = 'subnet-a5b848c3'
     }
     stages{
 //         stage('SCM Checkout'){
