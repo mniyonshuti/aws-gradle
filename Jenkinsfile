@@ -41,6 +41,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy Docker Image') {
             steps {
                 script {
