@@ -15,17 +15,17 @@ pipeline {
         }
         stage(' Gradle Clean'){
             steps{
-                sh './gradleW clean'
+                sh './gradlew clean'
             }
         }
         stage(' Gradle build'){
             steps{
-                 sh './gradleW build'
+                 sh './gradlew build'
             }
         }
         stage('Gradle Compile'){
             steps  {
-                sh './gradleW compileJava'
+                sh './gradlew compileJava'
             }
         }
         stage('Gradle Test'){
